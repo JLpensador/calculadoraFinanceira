@@ -1,0 +1,51 @@
+<div class="calculator">
+  <h2>Simulação Financeira</h2>
+  <form (submit)="calculate()" #form="ngForm">
+    <label for="loanAmount">Valor do Empréstimo (R$):</label>
+    <input
+      id="loanAmount"
+      type="number"
+      [(ngModel)]="loanAmount"
+      name="loanAmount"
+      required
+      aria-label="Insira o valor do empréstimo"
+    />
+
+    <label for="interestRate">Taxa de Juros (% ao ano):</label>
+    <input
+      id="interestRate"
+      type="number"
+      step="0.01"
+      [(ngModel)]="interestRate"
+      name="interestRate"
+      required
+      aria-label="Insira a taxa de juros anual"
+    />
+
+    <label for="months">Prazo (em meses):</label>
+    <input
+      id="months"
+      type="number"
+      [(ngModel)]="months"
+      name="months"
+      required
+      aria-label="Insira o prazo em meses"
+    />
+
+    <label for="type">Tipo de Cálculo:</label>
+    <select id="type" [(ngModel)]="calcType" name="calcType">
+      <option value="price">Tabela Price</option>
+      <option value="sac">Sistema SAC</option>
+    </select>
+
+    <button type="submit" [disabled]="form.invalid">Calcular</button>
+  </form>
+
+  <div *ngIf="result">
+    <h3>Resultado:</h3>
+    <p>Parcela Mensal: R$ {{ result.monthlyInstallment | number : "1.2-2" }}</p>
+    <p>Total Pago: R$ {{ result.totalPaid | number : "1.2-2" }}</p>
+  </div>
+
+  <canvas id="chart"></canvas>
+</div>
