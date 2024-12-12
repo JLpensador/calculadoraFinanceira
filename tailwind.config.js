@@ -3,15 +3,15 @@ module.exports = {
   content: ["./src/**/*.{html,ts}"],
   theme: {
     colors: {
-      background: "#282832",
-      primary: "#77181e",
-      secondary: "secondary",
+      background: "#000706",
+      primary: "#033649",
+      secondary: "#e8ddcb",
       neutral: "#dee7e7",
       "base-100": "base-100",
       success: "success",
     },
-    size: {
-      image: "4rem",
+    backgroundImage: {
+      gradient: "linear-gradient(to bottom left, #033649, #031634)",
     },
   },
   plugins: [],

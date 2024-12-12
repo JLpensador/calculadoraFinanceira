@@ -1,51 +1,69 @@
-<div class="calculator bg-background">
-  <h2>Simulação Financeira</h2>
+<div
+  class="rw-80 text-neutral absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-opacity-70 p-4 rounded-xl bg-background w-80"
+>
   <form (submit)="calculate()" #form="ngForm">
-    <label for="loanAmount">Valor do Empréstimo (R$):</label>
-    <input
-      id="loanAmount"
-      type="number"
-      [(ngModel)]="loanAmount"
-      name="loanAmount"
-      required
-      aria-label="Insira o valor do empréstimo"
-    />
+    <fieldset
+      class="border-secondary border-2 border-white p-4 rounded-lg flex flex-col"
+    >
+      <legend class="bg-primary border-2 border-neutral-content p-2 rounded-lg">
+        <h2>Simulação Financeira</h2>
+      </legend>
+      <label for="loanAmount">Valor do Empréstimo (R$):</label>
+      <input
+        id="loanAmount"
+        type="number"
+        [(ngModel)]="loanAmount"
+        name="loanAmount"
+        required
+        aria-label="Insira o valor do empréstimo"
+        class="text-primary"
+      />
+      <br />
+      <label for="interestRate">Taxa de Juros (% ao ano):</label>
+      <input
+        id="interestRate"
+        type="number"
+        step="0.01"
+        [(ngModel)]="interestRate"
+        name="interestRate"
+        required
+        aria-label="Insira a taxa de juros anual"
+        class="text-primary"
+      />
+      <br />
+      <label for="months">Prazo (em meses):</label>
+      <input
+        id="months"
+        type="number"
+        [(ngModel)]="months"
+        name="months"
+        required
+        aria-label="Insira o prazo em meses"
+        class="text-primary"
+      />
 
-    <label for="interestRate">Taxa de Juros (% ao ano):</label>
-    <input
-      id="interestRate"
-      type="number"
-      step="0.01"
-      [(ngModel)]="interestRate"
-      name="interestRate"
-      required
-      aria-label="Insira a taxa de juros anual"
-    />
+      <label for="type">Tipo de Cálculo:</label>
+      <select
+        id="type"
+        [(ngModel)]="calcType"
+        name="calcType"
+        class="text-primary"
+      >
+        <option value="price">Tabela Price</option>
+        <option value="sac">Sistema SAC</option>
+      </select>
 
-    <label for="months">Prazo (em meses):</label>
-    <input
-      id="months"
-      type="number"
-      [(ngModel)]="months"
-      name="months"
-      required
-      aria-label="Insira o prazo em meses"
-    />
+      <button type="submit" [disabled]="form.invalid">Calcular</button>
 
-    <label for="type">Tipo de Cálculo:</label>
-    <select id="type" [(ngModel)]="calcType" name="calcType">
-      <option value="price">Tabela Price</option>
-      <option value="sac">Sistema SAC</option>
-    </select>
+      <div *ngIf="result">
+        <h3>Resultado:</h3>
+        <p>
+          Parcela Mensal: R$ {{ result.monthlyInstallment | number : "1.2-2" }}
+        </p>
+        <p>Total Pago: R$ {{ result.totalPaid | number : "1.2-2" }}</p>
+      </div>
 
-    <button type="submit" [disabled]="form.invalid">Calcular</button>
+      <canvas id="chart" class="top-0 left-0 w-0"></canvas>
+    </fieldset>
   </form>
-
-  <div *ngIf="result">
-    <h3>Resultado:</h3>
-    <p>Parcela Mensal: R$ {{ result.monthlyInstallment | number : "1.2-2" }}</p>
-    <p>Total Pago: R$ {{ result.totalPaid | number : "1.2-2" }}</p>
-  </div>
-
-  <canvas id="chart"></canvas>
 </div>

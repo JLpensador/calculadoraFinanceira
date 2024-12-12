@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { CalculatorService } from '../../service/calculator.service';
 import { Chart } from 'chart.js';
 import { FormsModule } from '@angular/forms';
@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./card.component.scss'],
   standalone: true,
   imports: [CommonModule, FormsModule],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CardComponent {
   loanAmount = 0;
@@ -47,6 +48,9 @@ export class CardComponent {
     }
 
     const ctx = chartElement.getContext('2d');
+
+    chartElement.width = window.innerWidth * 0.8;
+    chartElement.height = 50;
 
     if (ctx) {
       if (this.calcType === 'price') {
